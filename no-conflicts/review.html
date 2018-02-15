@@ -1,0 +1,589 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Marie Curie Care Coordination - Review Schedule</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900">
+
+    <link rel="stylesheet" href="css/dragula.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+</head>
+
+<body>
+    <div id="loaderModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h2 class="font-weight-normal modal-title text-center">Welcome to Marie Curie Care Coordination</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="loader">Loading...</div>
+                    <p class="lead">You can review and make changes to nurse's schedule here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- review modal -->
+
+    <div id="reviewModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h2 class="font-weight-normal modal-title text-center">Marie Curie Care Coordination - Review</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="lead">Please review your changes</p>
+                        </div>
+                        <div class="col-sm-12">
+                            <a class="btn btn-lg btn-primary rounded bg-primary text-light border-primary" href="review.html">Review</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- profile modal -->
+
+    <div id="profileModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title display-4">Nurse A - Profile</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="lead">Location - Skills - Contact details</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- problems modal -->
+
+    <div id="problemsModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h2 class="font-weight-normal modal-title text-center">Important</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="lead">There are problems with your allocations. Please update the appointment schedule.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- success modal -->
+
+    <div id="successModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h2 class="font-weight-normal modal-title text-center">Success</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="lead">Your schedule has been committed. Nurses and patients allocated for this schedule will be notified.
+                        <br>
+                        <strong>Please click the close button</strong> at the top-right corner of the window to end the session</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidenav is-active bg-dark text-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2 sidenav-menu p-3">
+                    <div class="">
+                        <i class="fas fa-bars fa-2x d-none"></i>
+                        <i class="fas fa-times fa-2x d-inline-block"></i>
+                    </div>
+                </div>
+                <div id="mcAvailableNurses" class="col-xs-10 sidenav-options p-1">
+                    <!-- <div class="p-1 mb-2 bg-light rounded">
+                        <header>
+                            <span class="text-donation-orange">Important</span>
+                        </header>
+                        <p class="text-dark">Due to known term sickness, we are unable to delivery all care needs on the
+                            <strong>25/2</strong>.</p>
+                    </div> -->
+                    <br/><br/><br/><br/><br/>
+                    <div class="p-2 mb-2 bg-light rounded">
+                        <p>
+                          <strong class="text-dark">Notes about this schedule:</strong>
+                        </p>
+                        <p><textarea class="p-2" rows="6" cols="30">Anything to highlight? Any problems prioritising patients? Have lots of nurses needed to be moved around?
+                          </textarea></p>
+                        <p>
+                            <a class="btn btn-md btn-secondary rounded text-light border-secondary" data-toggle="modal"
+                                data-target=""> Save draft
+                            </a>
+                            <a class="btn btn-md btn-outline-primary rounded text-dark" data-toggle="modal"
+                                data-target=""> Submit for review
+                            </a>
+                        </p>
+                    </div>
+                    <div>
+                      <p>
+                        <a class="btn btn-lg btn-primary rounded bg-primary text-light border-primary animated infinite pulse" data-toggle="modal"
+                            data-target="#successModal"><strong>Commit schedule</strong>
+                        </a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-2 p-1">
+                    <header>
+                        <img alt="Marie Curie logo" class="img-fluid" src="img/logo-marie-curie.svg" />
+                    </header>
+                    <br>
+                </div>
+                <div class="col-sm-10 text-right"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-muted">
+        <div class="container">
+            <!-- messages panel -->
+
+            <div class="row">
+                <div class="col-sm-12 messages invisible">
+                    <p>You have changed the schedule -
+                        <a class="btn btn-lg btn-primary rounded bg-success text-light border-success animated infinite pulse" data-toggle="modal"
+                            data-target="#reviewModal">
+                            <i class="fas fa-save"></i> Review schedule and save changes
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row bg-light rounded-top pt-4">
+                <div id="" class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12 text-left">
+                            <div class="border-top">
+                                <a id="scrollLeft" class="btn btn-lg btn-dark text-light border-0 rounded-0">
+                                    <i class="fas fa-arrow-left"></i>
+                                </a>
+                                <a id="scrollRight" class="btn btn-lg btn-dark text-light border-0 rounded-0">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="schedule is-reviewed table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-bigger" scope="col"></th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">19/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">20/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">21/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">22/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">23/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">24/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">25/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">26/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">27/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">28/02</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">01/03</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">02/03</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">03/03</div>
+                                            </th>
+                                            <th class="text-center" scope="col">
+                                                <div class="bg-light-gray rounded p-2">04/03</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                                <td>
+                                                    <div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div>
+                                                </td>
+                                        </tr>
+                                        
+                                        <tr class="" style="background:#CCE0F2;">
+                                            <th scope="row">
+                                                <i class="bg-light fas fa-exclamation-circle p-2 rounded-circle"></i> Evie Watson
+                                                <br>
+                                                <small>Whitstable</small>
+                                            </th>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Muriel White<br>
+                                                <small>Margate</small></td>
+                                            <td></td>
+                                            <td>
+                                                <div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jenny Keith<br>
+                                                <small>Sevenoaks</small></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Paul Wood<br>
+                                                <small>Margate</small></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tim Capps<br>
+                                                <small>Broadstairs</small></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fiona York<br>
+                                                <small>Maidstone</small></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kate Christie<br>
+                                                <small>Tonbridge</small></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Laura Burns<br>
+                                                <small>Canterbury</small></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Abi Wright<br>
+                                                <small>Herne Bay</small></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bill Lodge<br>
+                                                <small>Rochester</small></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Helen Hope<br>
+                                                <small>Sevenoaks</small></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><div class="p-1 text-center bg-success">
+                                                  <i class="fas fa-check text-success"></i>
+                                              </div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="libs/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+        <script src="libs/dragula.min.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+            $('#successModal').on('hidden.bs.modal', function (e) {
+                window.location.assign("thank-you.html")
+            })
+        </script>
+</body>
+
+</html>

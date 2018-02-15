@@ -1,0 +1,247 @@
+/* common */
+
+html,
+body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+}
+
+strong {
+    font-weight: 500;
+}
+
+/* template */
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1240px;
+    }
+}
+
+/* scheduler */
+
+.schedule {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.schedule tr {
+    transition: background 300ms ease-out;
+}
+
+/* states */
+
+.is-unallocated {
+    cursor: pointer;
+}
+
+.is-unallocated:empty:after {
+    content: "empty";
+}
+
+/* iconography */
+
+.fas {
+    cursor: pointer;
+}
+
+/* themes */
+
+.bg-muted {
+    background: #7a99ac
+}
+
+.bg-dark {
+    background: #486373;
+}
+
+.bg-light-gray {
+    background: #dedede;
+}
+
+.bg-dark {
+    background: #486373;
+}
+
+.bg-danger {
+    background: #fbb29a !important;
+}
+
+.bg-success {
+    background: #cdefa1 !important;
+}
+
+.bg-info-muted {
+    background: #ffeb99;
+}
+
+.bg-donation-orange {
+    background: #ff9e1b;
+}
+
+.text-donation-orange {
+    color: #ff9e1b;
+}
+
+/* cards */
+
+.nurse-card {
+    border-left: 0.4rem solid #ff9e1b;
+}
+
+/* tables */
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+th {
+    font-weight: 500;
+    min-height: 4rem;
+    min-width: 20rem;
+}
+
+/* change width of cells when in review mode */
+
+.is-reviewed th {
+    min-width: 3rem;
+    max-width: 3rem;
+}
+.col-bigger {
+    min-width: 10rem !important;
+    max-width: 10rem !important;
+}
+.is-reviewed .table td, .table th {
+  padding: .25rem;
+}
+
+/* side nav */
+
+.sidenav {
+    height: 100%;
+    position: fixed;
+    right: 0;
+    transform: translateX(24rem);
+    transition: transform 300ms ease;
+    z-index: 100;
+}
+
+.sidenav-menu {
+    width: 4rem;
+}
+
+.sidenav-options {
+    width: 24rem;
+}
+
+.sidenav-options>div:not(:last-child) {
+    border-bottom: 1px solid white;
+}
+
+.sidenav.is-active {
+    transform: translateX(0);
+}
+
+/* loader */
+
+.loader,
+.loader:after {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+}
+
+.loader {
+    margin: 60px auto;
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 1.1em solid rgba(255, 205, 0, 0.2);
+    border-right: 1.1em solid rgba(255, 205, 0, 0.2);
+    border-bottom: 1.1em solid rgba(255, 205, 0, 0.2);
+    border-left: 1.1em solid #ffcd00;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+}
+
+/* animations */
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes pulse {
+    from {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.05, 1.05, 1.05);
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes pulse {
+    from {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        -webkit-transform: scale3d(1.05, 1.05, 1.05);
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+    to {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.pulse {
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+}
