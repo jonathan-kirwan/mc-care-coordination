@@ -41,13 +41,13 @@ dragula([
             target.classList.remove('bg-danger');
             target.classList.remove('is-unallocated');
             target.classList.add('bg-light', 'is-allocated');
-        }
-        else if (source.classList.contains('is-allocated')) {
+        } else if (source.classList.contains('is-allocated')) {
             console.log(target);
             console.log("allocated");
-            target.classList.add('bg-danger');
-            target.classList.add('is-unallocated');
-            target.classList.remove('bg-light', 'is-allocated');
+            source.classList.add('bg-danger');
+            source.classList.add('is-unallocated');
+            source.classList.remove('bg-light', 'is-allocated');
+            source.innerHTML = '';
         }
 
         var messagePanel = document.querySelector('.messages');

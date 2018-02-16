@@ -41,6 +41,11 @@ textarea {
     max-width: 1400px;
 }
 
+.schedule:not(.is-reviewed) td,
+.schedule:not(.is-reviewed) th {
+    border: 1px solid #ddd;
+}
+
 .schedule tr {
     transition: background 300ms ease-out;
 }
@@ -52,7 +57,7 @@ textarea {
 }
 
 .is-unallocated:empty:after {
-    content: "empty";
+    content: "Not Allocated";
 }
 
 /* iconography */

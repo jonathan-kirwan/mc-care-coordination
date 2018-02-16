@@ -37,6 +37,11 @@ strong {
     max-width: 1400px;
 }
 
+.schedule:not(.is-reviewed) td,
+.schedule:not(.is-reviewed) th {
+    border: 1px solid #ddd;
+}
+
 .schedule tr {
     transition: background 300ms ease-out;
 }
@@ -48,7 +53,7 @@ strong {
 }
 
 .is-unallocated:empty:after {
-    content: "empty";
+    content: "Not Allocated";
 }
 
 /* iconography */
@@ -120,12 +125,15 @@ th {
     min-width: 3rem;
     max-width: 3rem;
 }
+
 .col-bigger {
     min-width: 10rem !important;
     max-width: 10rem !important;
 }
-.is-reviewed .table td, .table th {
-  padding: .25rem;
+
+.is-reviewed .table td,
+.table th {
+    padding: .25rem;
 }
 
 /* side nav */
