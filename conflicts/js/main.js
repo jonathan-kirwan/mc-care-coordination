@@ -130,3 +130,41 @@ function scrollLeft(e) {
 };
 
 $('#scrollLeft').on("click", scrollLeft);
+
+let data = [{
+    "name": "jon",
+    "location": "peckham",
+    "role": "ui developer"
+}, {
+    "name": "jen",
+    "location": "east dulwich",
+    "role": "marketing manager"
+}, {
+    "name": "cath",
+    "location": "croydon",
+    "role": "psychiatric nurse"
+}];
+
+// templates
+
+let name, role, loc;
+
+function makeNurseCard(name, loc, role) {
+    return `
+        <strong>
+            <i class="bg-light text-dark fa-user fas p-2 rounded-circle"></i> ${name}
+        </strong>
+        <br>
+        <small>${loc}</small>
+        <br>
+        <small>${role}</small>
+    `;
+};
+
+data.forEach(item => {
+    var nurseCard = document.createElement('div');
+    nurseCard.classList.add('p-3', 'mb-2', 'bg-light', 'text-dark', 'rounded', 'nurse-card');
+    nurseCard.innerHTML = makeNurseCard(item.name, item.location, item.role)
+    // availableNurses.innerHTML = makeNurseCard(item.name, item.location, item.role);
+    availableNurses.appendChild(nurseCard);
+});
