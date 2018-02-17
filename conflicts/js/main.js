@@ -2,10 +2,10 @@ var sidenavMenu = document.querySelector('.sidenav'),
     sidenavBars = document.querySelector('.fa-bars'),
     sidenavTimes = document.querySelector('.fa-times'),
     unallocatedShifts = document.querySelectorAll('.is-unallocated'),
-    availableNurses = document.querySelector('#mcAvailableNurses');
-availableNursesCards = document.querySelector('#mcAvailableNurses > div');
+    availableNurses = document.querySelector('#mcAvailableNurses'),
+    availableNursesCards = document.querySelector('#mcAvailableNurses > div');
 
-// initialise dragula (drag and drop library)
+// Initialise Dragula (Drag and Drop Library)
 
 dragula([
     document.querySelector('.col1'),
@@ -131,40 +131,49 @@ function scrollLeft(e) {
 
 $('#scrollLeft').on("click", scrollLeft);
 
-let data = [{
-    "name": "jon",
-    "location": "peckham",
-    "role": "ui developer"
-}, {
-    "name": "jen",
-    "location": "east dulwich",
-    "role": "marketing manager"
-}, {
-    "name": "cath",
-    "location": "croydon",
-    "role": "psychiatric nurse"
-}];
+(function () {
+    // Populate Template
 
-// templates
+    function populateTemplate(responseAsJson) {
+        responseAsJson.forEach(arrayElement => {
+            var nurseCard = document.createElement('div');
+            nurseCard.classList.add('p-3', 'mb-2', 'bg-light', 'text-dark', 'rounded', 'nurse-card');
+            nurseCard.innerHTML = makeNurseCard(arrayElement.Name, arrayElement.Profile, arrayElement.Location, arrayElement.Role);
+            availableNurses.appendChild(nurseCard);
+        });
+    };
 
-let name, role, loc;
+    // Fetch Results
 
-function makeNurseCard(name, loc, role) {
-    return `
+    fetch('./json/nurses.json')
+        .then((response) => {
+            let results = response.json()
+            console.log(results);
+            return results;
+        })
+        .then(responseAsJson => {
+            populateTemplate(responseAsJson);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    // Display Templates
+
+    let name,
+        profile,
+        role,
+        place;
+
+    function makeNurseCard(name, profile, place, role) {
+        return `
         <strong>
-            <i class="bg-light text-dark fa-user fas p-2 rounded-circle"></i> ${name}
+        ${profile == "" ? `<i class="bg-light text-dark fa-user fas p-2 rounded-circle"></i>` : `<img alt="${name}" src="${profile}" class="rounded-circle">` } ${name}
         </strong>
         <br>
-        <small>${loc}</small>
+        <small>${place}</small>
         <br>
         <small>${role}</small>
     `;
-};
-
-data.forEach(item => {
-    var nurseCard = document.createElement('div');
-    nurseCard.classList.add('p-3', 'mb-2', 'bg-light', 'text-dark', 'rounded', 'nurse-card');
-    nurseCard.innerHTML = makeNurseCard(item.name, item.location, item.role)
-    // availableNurses.innerHTML = makeNurseCard(item.name, item.location, item.role);
-    availableNurses.appendChild(nurseCard);
-});
+    };
+})();
