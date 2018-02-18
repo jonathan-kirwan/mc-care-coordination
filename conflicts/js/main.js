@@ -135,15 +135,30 @@ $('#scrollLeft').on("click", scrollLeft);
     // Populate Template
 
     function populateTemplate(responseAsJson) {
+        console.log(responseAsJson);
         responseAsJson.forEach(arrayElement => {
-            var nurseCard = document.createElement('div');
+            let nurseCard = document.createElement('div');
             nurseCard.classList.add('p-3', 'mb-2', 'bg-light', 'text-dark', 'rounded', 'nurse-card');
             nurseCard.innerHTML = makeNurseCard(arrayElement.Name, arrayElement.Profile, arrayElement.Location, arrayElement.Role);
             availableNurses.appendChild(nurseCard);
         });
     };
 
-    // Fetch Results
+    function populateSchedule(responseAsJson) {
+        console.log(responseAsJson);
+        responseAsJson.forEach(arrayElement => {
+            let rowGroup = document.querySelector('.tbody');
+            let row = document.createElement('tr');
+            rowGroup.appendChild(row);
+            for (key in arrayElement) {
+                let col = document.createElement('td');
+                col.innerHTML = arrayElement[key];
+                row.appendChild(col);
+            }
+        });
+    };
+
+    // Fetch Results (Nurses)
 
     fetch('./json/nurses.json')
         .then((response) => {
@@ -158,6 +173,21 @@ $('#scrollLeft').on("click", scrollLeft);
             console.log(error);
         });
 
+    // Fetch Results (Schedule)
+
+    fetch('./json/schedule.json')
+        .then((response) => {
+            let results = response.json()
+            console.log(results);
+            return results;
+        })
+        .then(responseAsJson => {
+            populateSchedule(responseAsJson);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
     // Display Templates
 
     let name,
@@ -167,13 +197,13 @@ $('#scrollLeft').on("click", scrollLeft);
 
     function makeNurseCard(name, profile, place, role) {
         return `
-        <strong>
-        ${profile == "" ? `<i class="bg-light text-dark fa-user fas p-2 rounded-circle"></i>` : `<img alt="${name}" src="${profile}" class="rounded-circle">` } ${name}
-        </strong>
-        <br>
-        <small>${place}</small>
-        <br>
-        <small>${role}</small>
-    `;
+            <strong>
+            ${profile == "" ? `<i class="bg-light text-dark fa-user fas p-2 rounded-circle"></i>` : `<img alt="${name}" src="${profile}" class="rounded-circle">` } ${name}
+            </strong>
+            <br>
+            <small>${place}</small>
+            <br>
+            <small>${role}</small>
+        `;
     };
 })();
