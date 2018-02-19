@@ -158,6 +158,30 @@ $('#scrollLeft').on("click", scrollLeft);
         });
     };
 
+    $('#profileModal').on('show.bs.modal', (e) => {
+        let profile = e.relatedTarget.dataset.profile,
+            name = e.relatedTarget.dataset.name,
+            place = e.relatedTarget.dataset.place,
+            role = e.relatedTarget.dataset.role,
+            modalBody = document.querySelector('.profile-modal .modal-content');
+
+        modalBody.innerHTML = `
+            <div class="modal-header text-center">
+                <h2 class="align-items-center d-flex font-weight-normal modal-title">
+                    <img class="rounded-circle" alt="profile picture of ${name}" src="${profile}" /> ${name}
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="lead">I'm a registered nurse working in the community in Lanarkshire, Scotland. I've been with Marie Curie for 10 years now</p>
+                <p class="lead"><strong>Location</strong>: ${place}</p>
+                <p class="lead"><strong>Role</strong>: ${role}</p>
+            </div>
+        `;
+    })
+
     // Fetch Results (Nurses)
 
     fetch('./json/nurses.json')
@@ -204,6 +228,8 @@ $('#scrollLeft').on("click", scrollLeft);
             <small>${place}</small>
             <br>
             <small>${role}</small>
+            <br>
+            <a class="btn btn-sm btn-primary" href="#" data-name="${name}" data-profile="${profile}" data-place="${place}" data-role="${role}" data-toggle="modal" data-target="#profileModal">Profile</a>
         `;
     };
 })();
