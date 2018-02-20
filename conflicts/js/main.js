@@ -135,6 +135,9 @@ $('#scrollLeft').on("click", scrollLeft);
     // Populate Template
 
     function populateTemplate(responseAsJson) {
+        if (!availableNurses) {
+            return false;
+        }
         console.log(responseAsJson);
         responseAsJson.forEach(arrayElement => {
             let nurseCard = document.createElement('div');
@@ -145,14 +148,39 @@ $('#scrollLeft').on("click", scrollLeft);
     };
 
     function populateSchedule(responseAsJson) {
-        console.log(responseAsJson);
+        let rows = document.querySelector('.schedule__rows');
+        if (rows == null) {
+            return false;
+        }
         responseAsJson.forEach(arrayElement => {
-            let rowGroup = document.querySelector('.tbody');
             let row = document.createElement('tr');
-            rowGroup.appendChild(row);
+            rows.appendChild(row);
             for (key in arrayElement) {
                 let col = document.createElement('td');
                 col.innerHTML = arrayElement[key];
+                row.appendChild(col);
+            }
+        });
+    };
+
+    function populateReview(responseAsJson) {
+        let rows = document.querySelector('.is-reviewed__rows');
+        if (rows == null) {
+            return false;
+        }
+        responseAsJson.forEach(obj => {
+            let row = document.createElement('tr');
+            rows.appendChild(row);
+            for (key in obj) {
+
+                let col = document.createElement('td');
+
+                if (key == 'Patient') {
+                    console.log("Patient");
+                    col.innerHTML = ``;
+                } else {
+                    col.innerHTML = `${obj[key]}`;
+                }
                 row.appendChild(col);
             }
         });
@@ -180,7 +208,7 @@ $('#scrollLeft').on("click", scrollLeft);
                 <p class="lead"><strong>Role</strong>: ${role}</p>
             </div>
         `;
-    })
+    });
 
     // Fetch Results (Nurses)
 
@@ -207,6 +235,7 @@ $('#scrollLeft').on("click", scrollLeft);
         })
         .then(responseAsJson => {
             populateSchedule(responseAsJson);
+            populateReview(responseAsJson);
         })
         .catch(function (error) {
             console.log(error);
@@ -232,4 +261,7 @@ $('#scrollLeft').on("click", scrollLeft);
             <a class="btn btn-sm btn-primary" href="#" data-name="${name}" data-profile="${profile}" data-place="${place}" data-role="${role}" data-toggle="modal" data-target="#profileModal">Profile</a>
         `;
     };
+
+    var formData = localStorage.formData;
+    console.log(formData);
 })();

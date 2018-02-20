@@ -42,6 +42,10 @@ strong {
     border: 1px solid #ddd;
 }
 
+.schedule__rows {
+    
+}
+
 .schedule tr {
     transition: background 300ms ease-out;
 }
