@@ -172,10 +172,10 @@
                     <div class="row">
                         <div class="col-sm-12 text-left">
                             <div class="border-top">
-                                <a id="scrollLeft" class="btn btn-lg btn-dark text-light border-0 rounded-0">
+                                <a data-direction="prev" class="btn btn-lg btn-dark text-light border-0 rounded-0">
                                     <i class="fas fa-arrow-left"></i>
                                 </a>
-                                <a id="scrollRight" class="btn btn-lg btn-dark text-light border-0 rounded-0">
+                                <a data-direction="next" class="btn btn-lg btn-dark text-light border-0 rounded-0">
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
                             </div>
@@ -250,6 +250,7 @@
 
         <script src="libs/dragula.min.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/common.js"></script>
 
         <script>
             $('#successModal').on('hidden.bs.modal', function (e) {

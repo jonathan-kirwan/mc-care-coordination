@@ -111,26 +111,6 @@ function hideMenu() {
 
 sidenavTimes.addEventListener('click', hideMenu, false);
 
-// scroll the scheduler on click
-
-var schedule = $('.schedule');
-
-function scrollRight(e) {
-    $('.schedule').animate({
-        scrollLeft: '+=400',
-    }, 200)
-};
-
-$('#scrollRight').on("click", scrollRight);
-
-function scrollLeft(e) {
-    $('.schedule').animate({
-        scrollLeft: '-=400',
-    }, 200)
-};
-
-$('#scrollLeft').on("click", scrollLeft);
-
 (function () {
     // Populate Template
 
