@@ -174,12 +174,20 @@ $('#scrollLeft').on("click", scrollLeft);
             for (key in obj) {
 
                 let col = document.createElement('td');
+                col.style.verticalAlign = "top";
 
-                if (key == 'Patient') {
-                    console.log("Patient");
+                if (key === 'Patient') {
+                    col.innerHTML = `${obj[key]}`;
+                }
+                if (obj[key] === "") {
                     col.innerHTML = ``;
                 } else {
-                    col.innerHTML = `${obj[key]}`;
+                    col.innerHTML = `
+                        <div class="p-1 text-center bg-success">
+                            <i class="fas fa-check text-success"></i>
+                        </div>
+                        <small>${obj[key]}</small>
+                    `;
                 }
                 row.appendChild(col);
             }

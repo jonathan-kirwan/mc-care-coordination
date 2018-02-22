@@ -126,8 +126,8 @@ th {
 /* change width of cells when in review mode */
 
 .is-reviewed th {
-    min-width: 3rem;
-    max-width: 3rem;
+    min-width: 6rem;
+    max-width: 8rem;
 }
 
 .col-bigger {
