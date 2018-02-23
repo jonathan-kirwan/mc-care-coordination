@@ -121,19 +121,37 @@ sidenavTimes.addEventListener('click', hideMenu, false);
         console.log(responseAsJson);
         responseAsJson.forEach(arrayElement => {
             let nurseCard = document.createElement('div');
-            nurseCard.classList.add('p-3', 'mb-2', 'bg-light', 'text-dark', 'rounded', 'nurse-card');
+            nurseCard.classList.add('p-2', 'mb-2', 'bg-light', 'text-dark', 'rounded', 'nurse-card');
             nurseCard.innerHTML = makeNurseCard(arrayElement.Name, arrayElement.Profile, arrayElement.Location, arrayElement.Role);
             availableNurses.appendChild(nurseCard);
         });
     };
 
     function populateSchedule(responseAsJson) {
-        let rows = document.querySelector('.schedule__rows');
-        if (rows == null) {
+        let hrows = document.querySelector('.schedule-head__rows'),
+             rows = document.querySelector('.schedule__rows');
+        if (hrows === null || rows === null) {
             return false;
         }
-        responseAsJson.forEach(arrayElement => {
+
+        responseAsJson.forEach((arrayElement, i) => {
             let row = document.createElement('tr');
+            hrows.appendChild(row);
+            // populate head cells
+            if (i === 0) {
+                for (key in arrayElement) {
+                    let col = document.createElement('td');
+                    col.style.verticalAlign = "top";
+                    col.innerHTML = `
+                        <th class="text-center" scope="col">
+                            <div class="bg-light-gray rounded p-2">${key}</div>
+                        </th>
+                    `;
+                    row.appendChild(col);
+                }
+            }
+
+            // poplulate cells
             rows.appendChild(row);
             for (key in arrayElement) {
                 let col = document.createElement('td');
@@ -144,15 +162,32 @@ sidenavTimes.addEventListener('click', hideMenu, false);
     };
 
     function populateReview(responseAsJson) {
-        let rows = document.querySelector('.is-reviewed__rows');
-        if (rows == null) {
+        let hrows = document.querySelector('.schedule-head__rows'),
+             rows = document.querySelector('.is-reviewed__rows');
+        if (hrows === null || rows === null) {
             return false;
         }
-        responseAsJson.forEach(obj => {
+
+        responseAsJson.forEach((obj, i) => {
             let row = document.createElement('tr');
+            hrows.appendChild(row);
+            // populate head cells
+            if (i === 0) {
+                for (key in obj) {
+                    let col = document.createElement('td');
+                    col.style.verticalAlign = "top";
+                    col.innerHTML = `
+                        <th class="text-center" scope="col">
+                            <div class="bg-light-gray rounded p-2">${key}</div>
+                        </th>
+                    `;
+                    row.appendChild(col);
+                }
+            }
+
+            // poplulate cells
             rows.appendChild(row);
             for (key in obj) {
-
                 let col = document.createElement('td');
                 col.style.verticalAlign = "top";
 
