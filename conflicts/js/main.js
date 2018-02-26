@@ -129,16 +129,17 @@ sidenavTimes.addEventListener('click', hideMenu, false);
 
     function populateSchedule(responseAsJson) {
         let hrows = document.querySelector('.schedule-head__rows'),
-             rows = document.querySelector('.schedule__rows');
+            rows = document.querySelector('.schedule__rows');
         if (hrows === null || rows === null) {
             return false;
         }
 
         responseAsJson.forEach((arrayElement, i) => {
-            let row = document.createElement('tr');
-            hrows.appendChild(row);
+
             // populate head cells
             if (i === 0) {
+                let row = document.createElement('tr');
+                hrows.appendChild(row);
                 for (key in arrayElement) {
                     let col = document.createElement('td');
                     col.style.verticalAlign = "top";
@@ -149,29 +150,33 @@ sidenavTimes.addEventListener('click', hideMenu, false);
                     `;
                     row.appendChild(col);
                 }
-            }
+            } else {
+                let row = document.createElement('tr');
+                hrows.appendChild(row);
 
-            // poplulate cells
-            rows.appendChild(row);
-            for (key in arrayElement) {
-                let col = document.createElement('td');
-                col.innerHTML = arrayElement[key];
-                row.appendChild(col);
+                // poplulate cells
+                rows.appendChild(row);
+                for (key in arrayElement) {
+                    let col = document.createElement('td');
+                    col.innerHTML = arrayElement[key];
+                    row.appendChild(col);
+                }
             }
         });
     };
 
     function populateReview(responseAsJson) {
         let hrows = document.querySelector('.schedule-head__rows'),
-             rows = document.querySelector('.is-reviewed__rows');
+            rows = document.querySelector('.is-reviewed__rows');
         if (hrows === null || rows === null) {
             return false;
         }
 
         responseAsJson.forEach((obj, i) => {
+
+            // populate head cells
             let row = document.createElement('tr');
             hrows.appendChild(row);
-            // populate head cells
             if (i === 0) {
                 for (key in obj) {
                     let col = document.createElement('td');
@@ -183,28 +188,30 @@ sidenavTimes.addEventListener('click', hideMenu, false);
                     `;
                     row.appendChild(col);
                 }
-            }
+            } else {
 
-            // poplulate cells
-            rows.appendChild(row);
-            for (key in obj) {
-                let col = document.createElement('td');
-                col.style.verticalAlign = "top";
+                // poplulate cells
+                let row = document.createElement('tr');
+                rows.appendChild(row);
+                for (key in obj) {
+                    let col = document.createElement('td');
+                    col.style.verticalAlign = "top";
 
-                if (key === 'Patient') {
-                    col.innerHTML = `${obj[key]}`;
-                }
-                if (obj[key] === "") {
-                    col.innerHTML = ``;
-                } else {
-                    col.innerHTML = `
+                    if (key === 'Patient') {
+                        col.innerHTML = `${obj[key]}`;
+                    }
+                    if (obj[key] === "") {
+                        col.innerHTML = ``;
+                    } else {
+                        col.innerHTML = `
                         <div class="p-1 text-center bg-success">
                             <i class="fas fa-check text-success"></i>
                         </div>
                         <small>${obj[key]}</small>
                     `;
+                    }
+                    row.appendChild(col);
                 }
-                row.appendChild(col);
             }
         });
     };
